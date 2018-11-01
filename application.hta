@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+<title>Java Simulation Loader Tool v2.0</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">  
+<META HTTP-EQUIV="MSThemeCompatible" CONTENT="Yes">  
+<HTA:APPLICATION
+    APPLICATIONNAME = "Java Simulation Loader Tool"
+    ICON = ".\assets\favicon.ico"/>
+<style type="text/css">
+.footer {
+	
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: black;
+    text-align: centre;
+	background-color: white;
+	border-top: 3px solid black;
+}
+.footer_img {
+    float:left;
+    width:auto;
+	margin-left:10px;
+	margin-right:20px;
+	margin-bottom:8px;
+	margin-top: 8px;
+}
+
+.footer_text {
+    width:auto;
+	margin-top: 12px;
+}
+
+
+/* Style the buttons that are used to open the tab content */
+.tabButton {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 8px 5px;
+    transition: 0.3s;
+	display: inline-block;
+	margin:5px 0px 0px 5px;
+	font-family:Arial;
+}
+
+/* Change background color of buttons on hover */
+.tabButton:hover {
+    background-color: #ddd;
+}
+
+/*title*/
+#title{
+font-weight:bold;
+font-size:18px;
+text-decoration:underline;
+}
+
+.canvas{
+margin:0px 0px 0px 8px;
+}
+
+/*Table styling */
+#searchInput {
+    background-image: url('./assets/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 80%; /* 80 percent width */
+    font-size: 14px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 5px; /* Add some space below the input */
+}
+
+#filesTable {
+    border-collapse: collapse; /* Collapse borders */
+    width: 80%; /* 80 percent width */
+    border: 1px solid #ddd; /* Add a grey border */
+    font-size: 16px; /* Increase font-size */
+	font-family:Arial;
+}
+
+#filesTable th, #filesTable td {
+    text-align: left; /* Left-align text */
+    padding: 8px 5px 8px 5px; /* Add padding */
+}
+
+#filesTable tr {
+    /* Add a bottom border to all table rows */
+    border-bottom: 1px solid #ddd; 
+}
+
+#filesTable tr.header, #filesTable tr:hover {
+    /* Add a grey background color to the table header and on hover */
+    background-color: #f1f1f1;
+}
+
+.launchButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #8ade40;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #8ade40;
+	box-shadow:inset 0px 1px 0px 0px #8ade40;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #89c403), color-stop(1, #77a809));
+	background:-moz-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:-webkit-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:-o-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:-ms-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:linear-gradient(to bottom, #89c403 5%, #77a809 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#89c403', endColorstr='#77a809',GradientType=0);
+	background-color:#89c403;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #74b807;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:14px;
+	font-weight:bold;
+	padding:6px 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #528009;
+}
+.launchButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77a809), color-stop(1, #89c403));
+	background:-moz-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:-webkit-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:-o-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:-ms-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:linear-gradient(to bottom, #77a809 5%, #89c403 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77a809', endColorstr='#89c403',GradientType=0);
+	background-color:#77a809;
+}
+.launchButton:active {
+	position:relative;
+	top:1px;
+}
+</style>
+<!--VBSCRIPT function to run JAR opening command-->
+<script language="vbscript">  
+ 
+Sub RunScript  
+  notifier.innerHTML = "running command .\assets\Java\CommonFiles\Java64\bin\java -jar " & fileloader.value
+  Dim objShell
+  Set objShell = CreateObject("Wscript.Shell")
+  objShell.run ".\assets\Java\CommonFiles\Java64\bin\java -jar " & fileloader.value
+  Set Shell = Nothing
+End Sub  
+ 
+</script> 
+<script language = "JScript">
+//Constructor for type category
+function Category(shortName, longName){
+	this.shortName = shortName;
+	this.longName = longName;
+}
+//declaring global category objects
+var all = new Category("all", "All Categories");
+var astro = new Category("astro", "Astrophysics");
+var electric = new Category("electric", "Electricity & Electric Fields");
+var energy = new Category("energy", "Energy Forms & Transfers");
+var forces = new Category("forces","Forces and Motion");
+var magnets = new Category("magnets", "Magnetism and Electromagnetism");
+var matter = new Category("matter", "Matter & Gases");
+var nuclear = new Category("nuclear", "Radioactivity and Particles");
+var waves = new Category("waves", "Waves");
+var other = new Category("other","Other");
+var categoryArray = [all,astro,electric,energy,forces,magnets,matter,nuclear,waves,other];
+
+function loadHTA(){
+var i;
+	for (i = 0; i < categoryArray.length; i++) { 
+		document.getElementById("tabs").innerHTML += "<button class=\"tabButton\" onclick=\"loadTable\('" +i+ "'\)\">"+categoryArray[i].longName+"<\/button>";
+	}
+	loadTable(1);
+}
+
+//function to clear the table
+function clearTable(){
+	var numRows = document.getElementById("filesTable").rows.length;
+	var i;
+	for (i=0;i<(numRows-1);i++){
+		document.getElementById("filesTable").deleteRow(1);
+	}
+}
+
+function loadTable(categoryIndex){
+	//call function to clear the table
+	clearTable();
+	
+	//set title
+	document.getElementById("title").innerHTML = categoryArray[categoryIndex].longName;
+	
+	//if all, call fillData many times
+	var i;
+	if(categoryIndex==0){
+		for(i=1;i<=9;i++){
+		fillData(i);
+		}
+		sortTable();
+	}
+	
+	//else call fillData once
+	else{
+		fillData(categoryIndex);
+	}
+	
+}
+
+function fillData(categoryIndex){
+	//set subfolder
+	var subFolder = categoryArray[categoryIndex].shortName;
+	//filepath and other variables
+	var objFolder, colFiles, strFileName, newDataFilename, newDataButton, newRow, rowNum, newButton;
+	var objStartFolder = "./assets/simulation_files/"+ subFolder;
+	// set up a File System Object variable.. 
+	var objFSO =  new ActiveXObject("Scripting.FileSystemObject");
+	objFolder = objFSO.GetFolder(objStartFolder);
+	colFiles = new Enumerator(objFolder.Files);
+	colFiles.moveFirst();
+	var strhtml;
+	var fileNameOnly , splitArray;
+	for (; !colFiles.atEnd(); colFiles.moveNext()) { 
+		strFileName= colFiles.item();
+		newDataFilename = document.createElement("TD");
+		newDataFilename.appendChild(document.createTextNode(strFileName));
+		splitArray = newDataFilename.innerHTML.split("\\");
+		fileNameOnly = splitArray[splitArray.length - 1];
+		newDataFilename.innerHTML = fileNameOnly;
+		newDataButton = document.createElement("TD");
+		strhtml = "<input type=\"button\" class=\"launchButton\" value=\"Click to launch\" onClick=\"launchJar\('" + subFolder + "," + fileNameOnly + "'\)\">";
+		var notifier = document.getElementById("notifier");
+		newDataButton.innerHTML = strhtml;
+		newRow = document.getElementById("filesTable").insertRow();
+		newRow.appendChild(newDataFilename);
+		newRow.appendChild(newDataButton);
+	} 
+}
+
+//function to launch JAR file
+function launchJar(pathstring){
+	var subFolder = pathstring.split(",")[0];
+	var fileName = pathstring.split(",")[1];
+	var WShell = new ActiveXObject("WScript.Shell");
+	var commandString = ".\\assets\\Java\\CommonFiles\\Java64\\bin\\java -jar .\\assets\\simulation_files\\"+subFolder+ "\\" + fileName;
+	var notifier = document.getElementById("notifier");
+	notifier.innerHTML = "Running Command " + commandString;
+	WShell.Run(commandString , 1, false);
+}
+
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("filesTable");
+  switching = true;
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0];
+      // Check if the two rows should switch place:
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        // If so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+
+function searchTable() {
+  // Declare variables 
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("searchInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("filesTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+
+</script>
+
+</head> 
+<body onload="loadHTA()" >
+<div class="canvas">
+Choose a JAR file to run:<br> 
+<input type="file" id="fileloader" onchange="RunScript"></input>  
+<p>  
+<p>or click a category below:<p>
+<p>
+<div id="tabs">
+</div>
+<br>
+<input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for names..">
+<p id="title"></p>
+<table id = "filesTable">
+  <tr class="header">
+    <th>Filename</th> 
+	<th>Click to launch!</th>
+  </tr>
+</table>
+<hr> 
+<!--The last run command appears here-->
+<span id = "notifier"></span><p>
+
+<div class="footer">
+<div class="footer_img"> <img src=".\assets\favicon-256.png" height="52" width="52"></div>
+<div class="footer_text">
+  <p>Developed by: Isuru Walpola
+  <br>Permanent Residence: <a href="https://github.com/iwalpola/portablejarloadtool">
+  https://github.com/iwalpola/portablejarloadtool</a>.
+  <br> Version:2.0</p>
+  </div>
+</div>
+</div>
+</body> 
+</html> 
