@@ -11,9 +11,9 @@ Open the file called "application". use the buttons to choose a category, or cli
 
 To add new java simulations to the collection, 
 
-1.download the java simulation from phet.colorado.edu
-2.copy the downloaded file to the "assets/simulation_files" folder, choosing an appropriate category
-3.restart the application.
+1. download the java simulation from phet.colorado.edu
+2. copy the downloaded file to the "assets/simulation_files" folder, choosing an appropriate category
+3. restart the application.
 
 If you have any suggestion, or require the addition/amendment of a category, please contact me at the project's [Github page](https://github.com/iwalpola/phet-java-simulations-launcher/)
 
