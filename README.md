@@ -6,7 +6,7 @@ It was developed because
 - the school I work at does not install JVM on its computers
 - the casual user and students do not know how to use JavaPortable.
 
-## Intructions
+## Instructions
 Open the file called "application". use the buttons to choose a category, or click "All categories" to get a list of all available simulations. Use the search feature to further refine the search.
 
 To add new java simulations to the collection, 
