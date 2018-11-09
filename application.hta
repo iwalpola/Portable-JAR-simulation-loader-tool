@@ -174,7 +174,7 @@ var i;
 	for (i = 0; i < categoryArray.length; i++) { 
 		document.getElementById("tabs").innerHTML += "<button class=\"tabButton\" onclick=\"loadTable\('" +i+ "'\)\">"+categoryArray[i].longName+"<\/button>";
 	}
-	loadTable(1);
+	loadTable(0);
 }
 
 //function to clear the table
@@ -306,6 +306,14 @@ function searchTable() {
   }
 }
 
+function clearInput(){
+	document.getElementById("searchInput").value='';
+}
+
+function fillInput(){
+	document.getElementById("searchInput").value="Search for something...";
+}
+
 </script>
 
 </head> 
@@ -319,7 +327,7 @@ Choose a JAR file to run:<br>
 <div id="tabs">
 </div>
 <br>
-<input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for names..">
+<input type="text" id="searchInput" onkeyup="searchTable()" value="Search for something..." onfocus="clearInput()" onblur="fillInput" /></p>
 <p id="title"></p>
 <table id = "filesTable">
   <tr class="header">
@@ -334,9 +342,9 @@ Choose a JAR file to run:<br>
 <div class="footer">
 <div class="footer_img"> <img src=".\assets\favicon-256.png" height="52" width="52"></div>
 <div class="footer_text">
-  <p>Developed by: Isuru Walpola
-  <br>Permanent Residence: <a href="https://github.com/iwalpola/portablejarloadtool">
-  https://github.com/iwalpola/portablejarloadtool</a>.
+  <p>Developed by: I.P. Walpola
+  <br>Permanent Residence: <a href="https://github.com/iwalpola/Portable-JAR-simulation-loader-tool">
+  https://github.com/iwalpola/Portable-JAR-simulation-loader-tool</a>.
   <br> Version:2.0</p>
   </div>
 </div>
